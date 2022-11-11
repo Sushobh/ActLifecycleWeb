@@ -1,27 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+
+import styles from './App.module.css'
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
-import ListItemText from '@mui/material/ListItemText';
-import ListItem from '@mui/material/ListItem';
-import InboxIcon from '@mui/icons-material/Inbox';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import List from '@mui/material/List';
-import { Divider, ListItemButton } from '@mui/material';
-import { ActivityItem, ActivityListInfo, ActivityListing } from './activitylisting/ActivityListing';
+import { ActivityItem, ActivityListInfo, VWActivityListing } from './activitylisting/ActivityListing';
+import { FragmentItem, VWFragmentListing } from './activitylisting/fragmentlisting/FragmentListing';
 function App() {
 
   const activityInfo = new ActivityListInfo()
-  activityInfo.addItem(new ActivityItem('MainActivity',false))
-  activityInfo.addItem(new ActivityItem('PaymentActivity',false))
-  activityInfo.addItem(new ActivityItem('Settings Activity',true))
-  activityInfo.addItem(new ActivityItem('Product Activity',false))
+  activityInfo.addItem(new ActivityItem('MainActivity',false,'onCreate'))
+  activityInfo.addItem(new ActivityItem('PaymentActivity',false,'onDestroy'))
+  activityInfo.addItem(new ActivityItem('Settings Activity',true,'onResume'))
+  activityInfo.addItem(new ActivityItem('Product Activity',false,'onCreateView'))
+
+  const fragmentItems : Array<FragmentItem> = []
+  fragmentItems.push(new FragmentItem('ChildFragment1',"onCreate"))
+  fragmentItems.push(new FragmentItem('ChildFragment2',"onStop"))
+  fragmentItems.push(new FragmentItem('ChildFragment3',"onResume"))
   return (
-    <div className="App">
-         <ActivityListing info={activityInfo}></ActivityListing>
+    <div className={styles.MainContainer}>
+          <h2>Activity Tracker</h2> 
+          <div className={styles.MainContainer2}>
+              <VWActivityListing info={activityInfo}></VWActivityListing> 
+              <VWFragmentListing items={fragmentItems}>
+              </VWFragmentListing>
+          </div>
     </div>
   );
 }
