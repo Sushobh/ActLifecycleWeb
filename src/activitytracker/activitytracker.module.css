@@ -1,0 +1,55 @@
+
+
+.eventFullContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px;
+    justify-content: center;
+}
+
+.card {
+    min-width: 500px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-left: 20px;
+}
+.card p {
+    color: white;
+}
+
+.tagCard {
+     
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.tagCard p {
+  
+}
+
+.maincontainer {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.list {
+    max-height: 100px;
+}
+
+.item-enter {
+    opacity: 0;
+  }
+  .item-enter-active {
+    opacity: 1;
+    transition: opacity 500ms ease-in;
+  }
+  .item-exit {
+    opacity: 1;
+  }
+  .item-exit-active {
+    opacity: 0;
+    transition: opacity 500ms ease-in;
+  }

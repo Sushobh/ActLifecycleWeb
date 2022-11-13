@@ -6,7 +6,8 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import { ActivityItem, ActivityListInfo, VWActivityListing } from './activitylisting/ActivityListing';
 import { FragmentItem, VWFragmentListing } from './activitylisting/fragmentlisting/FragmentListing';
-function App() {
+import { VWEventListing } from './activitytracker/ActivityTracker';
+/* function App() {
 
   const activityInfo = new ActivityListInfo()
   activityInfo.addItem(new ActivityItem('MainActivity',false,'onCreate'))
@@ -29,5 +30,9 @@ function App() {
     </div>
   );
 }
+ */
 
+function App() {
+  return (<VWEventListing></VWEventListing>)
+}
 export default App;
