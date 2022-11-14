@@ -1,10 +1,11 @@
 
-
+p {
+  font-size: 15px;
+}
 .eventFullContainer {
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 10px;
     justify-content: center;
 }
 
@@ -35,9 +36,7 @@
     align-items: center;
 }
 
-.list {
-    max-height: 100px;
-}
+
 
 .item-enter {
     opacity: 0;

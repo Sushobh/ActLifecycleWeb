@@ -7,7 +7,7 @@ import { useInterval } from './UseInterval';
 import { useState } from 'react';
 import { TransitionGroup, CSSTransition } from "react-transition-group"
 import * as React from 'react';
-
+import { useTransition, animated } from '@react-spring/web'
 
 export class AndroidEvent {
     eventType: string = ""
@@ -33,13 +33,29 @@ function VWEventItem(props: any) {
         </ListItem>)
 }
 
+
+
 export function VWEventListing() {
     {
         let [data, setData] = useState(new Array<AndroidEvent>())
         useInterval(() => {
-            let event = new AndroidEvent(data.length + 1 + '', 'Activity', { text: 'MainActivity => OnCreate' })
-            setData([...data, event])
-        }, 1000);
+            let event = new AndroidEvent(data.length + 1 + '', 'Activity', { text: 'MainActivity => OnCreate'+(data.length+1) })
+            let event1 = new AndroidEvent(data.length + 2 + '', 'Activity', { text: 'MainActivity => OnCreate'+(data.length+2) })
+            let event2 = new AndroidEvent(data.length + 3 + '', 'Activity', { text: 'MainActivity => OnCreate'+(data.length+3) })
+            setData([event,event1,event2, ...data])
+        }, 2000);
+
+
+
+        const transitions = useTransition(data, {
+            from: item => {
+                return { height : '0px' }
+            },
+            enter: item => {
+                console.log(item)
+                return { height : '60px' }
+            },
+        })
 
         return (
 
@@ -47,10 +63,11 @@ export function VWEventListing() {
                 <h3>Activity/Fragment lifecycle tracker</h3>
                 <List className={styles.list}>
                     {
-                        data.map((_, i) => {
-                            return <VWEventItem key={data[i].id} info={data[i]}></VWEventItem>
-                        }
-                        )
+                        transitions((style, item) => (
+                            <animated.div style={style} key={item.id}>
+                                <VWEventItem  info={item}></VWEventItem>
+                            </animated.div>
+                        ))
                     }
                 </List>
 
