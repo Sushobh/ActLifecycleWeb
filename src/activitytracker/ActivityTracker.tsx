@@ -42,23 +42,27 @@ export function VWEventListing() {
             let event = new AndroidEvent(data.length + 1 + '', 'Activity', { text: 'MainActivity => OnCreate'+(data.length+1) })
             let event1 = new AndroidEvent(data.length + 2 + '', 'Activity', { text: 'MainActivity => OnCreate'+(data.length+2) })
             let event2 = new AndroidEvent(data.length + 3 + '', 'Activity', { text: 'MainActivity => OnCreate'+(data.length+3) })
-            setData([event,event1,event2, ...data])
+            addNewItems([event])
         }, 2000);
 
+
+ 
+
+        let addNewItems = (newItems : Array<AndroidEvent>) => {
+            setData([...newItems, ...data])
+        }
 
 
         const transitions = useTransition(data, {
             from: item => {
-                return { height : '0px' }
+                return { height : '0px', opacity : '0', transform: 'scaleX(0)' }
             },
             enter: item => {
-                console.log(item)
-                return { height : '60px' }
+                return { height : '60px' , opacity : '1', transform: 'scaleX(1)'}
             },
         })
 
         return (
-
             <div className={styles.maincontainer}>
                 <h3>Activity/Fragment lifecycle tracker</h3>
                 <List className={styles.list}>
